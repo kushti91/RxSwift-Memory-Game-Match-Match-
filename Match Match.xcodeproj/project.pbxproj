@@ -15,6 +15,12 @@
 		410F95DB238D16BD0028ECC5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 410F95D9238D16BD0028ECC5 /* LaunchScreen.storyboard */; };
 		410F95E6238D16BD0028ECC5 /* Match_MatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410F95E5238D16BD0028ECC5 /* Match_MatchTests.swift */; };
 		410F95F1238D16BD0028ECC5 /* Match_MatchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410F95F0238D16BD0028ECC5 /* Match_MatchUITests.swift */; };
+		410F9602238FBFC60028ECC5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410F9601238FBFC60028ECC5 /* LoginViewController.swift */; };
+		410F9604238FC74E0028ECC5 /* IconSet.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 410F9603238FC74E0028ECC5 /* IconSet.xcassets */; };
+		410F9606238FC7D90028ECC5 /* TextFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 410F9605238FC7D90028ECC5 /* TextFieldView.xib */; };
+		410F960B238FC89F0028ECC5 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410F960A238FC89E0028ECC5 /* TextFieldView.swift */; };
+		410F960D238FC8CC0028ECC5 /* TextFieldViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410F960C238FC8CC0028ECC5 /* TextFieldViewStyle.swift */; };
+		410F960F238FC8F80028ECC5 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410F960E238FC8F80028ECC5 /* Validator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +55,12 @@
 		410F95EC238D16BD0028ECC5 /* Match MatchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Match MatchUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		410F95F0238D16BD0028ECC5 /* Match_MatchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match_MatchUITests.swift; sourceTree = "<group>"; };
 		410F95F2238D16BD0028ECC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		410F9601238FBFC60028ECC5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		410F9603238FC74E0028ECC5 /* IconSet.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = IconSet.xcassets; sourceTree = "<group>"; };
+		410F9605238FC7D90028ECC5 /* TextFieldView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldView.xib; sourceTree = "<group>"; };
+		410F960A238FC89E0028ECC5 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
+		410F960C238FC8CC0028ECC5 /* TextFieldViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldViewStyle.swift; sourceTree = "<group>"; };
+		410F960E238FC8F80028ECC5 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,11 +111,17 @@
 		410F95CD238D16BC0028ECC5 /* Match Match */ = {
 			isa = PBXGroup;
 			children = (
+				410F9607238FC8680028ECC5 /* Input Validator */,
+				410F95FE238E741C0028ECC5 /* Model */,
+				410F95FF238E74290028ECC5 /* View */,
+				410F9600238E74350028ECC5 /* ViewModel */,
 				410F95CE238D16BC0028ECC5 /* AppDelegate.swift */,
 				410F95D0238D16BC0028ECC5 /* SceneDelegate.swift */,
 				410F95D2238D16BC0028ECC5 /* ViewController.swift */,
 				410F95D4238D16BC0028ECC5 /* Main.storyboard */,
+				410F9605238FC7D90028ECC5 /* TextFieldView.xib */,
 				410F95D7238D16BD0028ECC5 /* Assets.xcassets */,
+				410F9603238FC74E0028ECC5 /* IconSet.xcassets */,
 				410F95D9238D16BD0028ECC5 /* LaunchScreen.storyboard */,
 				410F95DC238D16BD0028ECC5 /* Info.plist */,
 			);
@@ -126,6 +144,38 @@
 				410F95F2238D16BD0028ECC5 /* Info.plist */,
 			);
 			path = "Match MatchUITests";
+			sourceTree = "<group>";
+		};
+		410F95FE238E741C0028ECC5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		410F95FF238E74290028ECC5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				410F9601238FBFC60028ECC5 /* LoginViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		410F9600238E74350028ECC5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		410F9607238FC8680028ECC5 /* Input Validator */ = {
+			isa = PBXGroup;
+			children = (
+				410F960A238FC89E0028ECC5 /* TextFieldView.swift */,
+				410F960C238FC8CC0028ECC5 /* TextFieldViewStyle.swift */,
+				410F960E238FC8F80028ECC5 /* Validator.swift */,
+			);
+			path = "Input Validator";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,7 +282,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				410F9606238FC7D90028ECC5 /* TextFieldView.xib in Resources */,
 				410F95DB238D16BD0028ECC5 /* LaunchScreen.storyboard in Resources */,
+				410F9604238FC74E0028ECC5 /* IconSet.xcassets in Resources */,
 				410F95D8238D16BD0028ECC5 /* Assets.xcassets in Resources */,
 				410F95D6238D16BC0028ECC5 /* Main.storyboard in Resources */,
 			);
@@ -259,6 +311,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				410F960B238FC89F0028ECC5 /* TextFieldView.swift in Sources */,
+				410F960D238FC8CC0028ECC5 /* TextFieldViewStyle.swift in Sources */,
+				410F960F238FC8F80028ECC5 /* Validator.swift in Sources */,
+				410F9602238FBFC60028ECC5 /* LoginViewController.swift in Sources */,
 				410F95D3238D16BC0028ECC5 /* ViewController.swift in Sources */,
 				410F95CF238D16BC0028ECC5 /* AppDelegate.swift in Sources */,
 				410F95D1238D16BC0028ECC5 /* SceneDelegate.swift in Sources */,
@@ -442,7 +498,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Ali.Match-Match";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ali.Match-Match";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -461,7 +517,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Ali.Match-Match";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ali.Match-Match";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
