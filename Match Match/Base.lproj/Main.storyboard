@@ -8,20 +8,119 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Registeration controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Match_Match" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Registeration controller" id="BYZ-38-t0r" customClass="RegisterationViewController" customModule="Match_Match" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="aag-KI-y00">
+                                <rect key="frame" x="10" y="146" width="394" height="260"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Vw-mZ-zNM" customClass="TextFieldView" customModule="Match_Match" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="textfieldColor">
+                                                <color key="value" red="0.84488551199999995" green="0.89494782689999997" blue="0.87326571450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="ic_mail_outline"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="tfCornerRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Enter your email"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eJt-Au-fkC" customClass="TextFieldView" customModule="Match_Match" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="70" width="394" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="textfieldColor">
+                                                <color key="value" red="0.84488551199999995" green="0.89494782689999997" blue="0.87326571450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="ic_perm_identity_white"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="tfCornerRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Enter your nickname"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y2h-cp-zGN" customClass="TextFieldView" customModule="Match_Match" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="140" width="394" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="textfieldColor">
+                                                <color key="value" red="0.84488551199999995" green="0.89494782689999997" blue="0.87326571450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="ellipses.bubble" catalog="system"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="tfCornerRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Type your passoword"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lL9-DI-aM4" customClass="TextFieldView" customModule="Match_Match" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="210" width="394" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="textfieldColor">
+                                                <color key="value" red="0.84488551199999995" green="0.89494782689999997" blue="0.87326571450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="ellipses.bubble" catalog="system"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="tfCornerRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Re-type your password"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="260" id="lnT-R3-ikr"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oV3-WD-pn1">
+                                <rect key="frame" x="141" y="436" width="132" height="50"/>
+                                <color key="backgroundColor" red="0.89494782689999997" green="0.74015182469999996" blue="0.34881709979999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="132" id="GHc-3R-5ww"/>
+                                    <constraint firstAttribute="height" constant="50" id="kzI-wj-bvA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
+                                <state key="normal" title="Register">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="handleLogin:" destination="JhC-Rt-fhN" eventType="touchUpInside" id="nsW-cW-N0Y"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="aag-KI-y00" secondAttribute="trailing" constant="10" id="3WQ-4t-PdR"/>
+                            <constraint firstItem="oV3-WD-pn1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="L7F-wc-aSl"/>
+                            <constraint firstItem="aag-KI-y00" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="Yde-Ih-0N3"/>
+                            <constraint firstItem="oV3-WD-pn1" firstAttribute="top" secondItem="aag-KI-y00" secondAttribute="bottom" constant="30" id="bVj-yX-tv0"/>
+                            <constraint firstItem="aag-KI-y00" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="58" id="gIl-9m-gaf"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="vJf-v3-1BB"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="firstColor">
+                            <color key="value" red="0.57003107710000001" green="0.404343852" blue="0.76435012989999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="secondColor">
+                            <color key="value" red="0.2696037704" green="0.19351011409999999" blue="0.35915104990000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-946" y="206"/>
+            <point key="canvasLocation" x="1345" y="206"/>
         </scene>
         <!--Login NavCont-->
         <scene sceneID="60j-1v-gMl">
@@ -30,6 +129,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1Fh-4g-gsN">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.57003107710000001" green="0.404343852" blue="0.76435012989999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.84488551199999995" green="0.89494782689999997" blue="0.87326571450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="JhC-Rt-fhN" kind="relationship" relationship="rootViewController" id="z47-f0-TB0"/>
@@ -46,15 +149,135 @@
                     <view key="view" contentMode="scaleToFill" id="3BQ-fV-cly">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="J5c-cI-aC7">
+                                <rect key="frame" x="15" y="94" width="384" height="158"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bkq-4H-wnn" customClass="TextFieldView" customModule="Match_Match" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="384" height="74"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Enter your email"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="tfBorderWidth">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="tfCornerRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="ic_mail_outline_white"/>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="messageTextColor">
+                                                <color key="value" red="0.89409875869750977" green="0.38620328903198242" blue="0.2590675950050354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="textfieldColor">
+                                                <color key="value" red="0.84488551203667195" green="0.89494782686233521" blue="0.87326571446845636" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="messageLblColor">
+                                                <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lfa-Zb-seu" customClass="TextFieldView" customModule="Match_Match" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="84" width="384" height="74"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="74" id="lQc-CN-bvD"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Enter your password: 8+ alpha"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="titleText" value=" "/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="tfCornerRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="ellipses.bubble" catalog="system"/>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="textfieldColor">
+                                                <color key="value" red="0.84488551199999995" green="0.89494782689999997" blue="0.87326571450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="messageTextColor">
+                                                <color key="value" red="0.89409875869750977" green="0.38620328903198242" blue="0.2590675950050354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7nO-tm-i8P">
+                                <rect key="frame" x="141" y="276" width="132" height="50"/>
+                                <color key="backgroundColor" red="0.89494782689999997" green="0.74015182466162655" blue="0.34881709982348202" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="bt2-EO-zrl"/>
+                                    <constraint firstAttribute="width" constant="132" id="tMe-XI-0ak"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
+                                <state key="normal" title="LOGIN">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="handleLogin:" destination="JhC-Rt-fhN" eventType="touchUpInside" id="S45-X8-1Tr"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WEL-qr-qQ2">
+                                <rect key="frame" x="36" y="792" width="342" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Don't you have an account ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kag-tg-BLF">
+                                        <rect key="frame" x="0.0" y="0.0" width="255" height="30"/>
+                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
+                                        <color key="textColor" red="0.84488551199999995" green="0.89494782689999997" blue="0.87326571450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XU4-4k-vp6">
+                                        <rect key="frame" x="263" y="0.0" width="79" height="30"/>
+                                        <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="21"/>
+                                        <state key="normal" title="SIGNUP">
+                                            <color key="titleColor" red="0.84488551199999995" green="0.89494782689999997" blue="0.87326571450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="show" id="fdv-wX-T5E"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="vor-PS-Nhq"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="7nO-tm-i8P" firstAttribute="top" secondItem="J5c-cI-aC7" secondAttribute="bottom" constant="24" id="8pY-0Q-gsv"/>
+                            <constraint firstItem="J5c-cI-aC7" firstAttribute="top" secondItem="7Xe-rM-mz8" secondAttribute="top" constant="50" id="Ubt-RO-1hO"/>
+                            <constraint firstItem="7Xe-rM-mz8" firstAttribute="bottom" secondItem="WEL-qr-qQ2" secondAttribute="bottom" constant="40" id="ayy-gs-5RN"/>
+                            <constraint firstItem="7Xe-rM-mz8" firstAttribute="trailing" secondItem="J5c-cI-aC7" secondAttribute="trailing" constant="15" id="hjA-P4-Rtn"/>
+                            <constraint firstItem="WEL-qr-qQ2" firstAttribute="centerX" secondItem="3BQ-fV-cly" secondAttribute="centerX" id="lcZ-zV-riH"/>
+                            <constraint firstItem="7nO-tm-i8P" firstAttribute="centerX" secondItem="3BQ-fV-cly" secondAttribute="centerX" id="ujd-DV-zMW"/>
+                            <constraint firstItem="J5c-cI-aC7" firstAttribute="leading" secondItem="7Xe-rM-mz8" secondAttribute="leading" constant="15" id="yab-Q2-7d3"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="7Xe-rM-mz8"/>
                     </view>
                     <navigationItem key="navigationItem" id="6kH-Ly-FCe"/>
                     <nil key="simulatedTopBarMetrics"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="firstColor">
+                            <color key="value" red="0.57003107709619238" green="0.40434385197790967" blue="0.76435012986903561" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="secondColor">
+                            <color key="value" red="0.26960377039165856" green="0.19351011406284066" blue="0.35915104991893476" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="emailInputView" destination="bkq-4H-wnn" id="v3v-jW-wI1"/>
+                        <outlet property="loginButton" destination="7nO-tm-i8P" id="FGx-8F-LD4"/>
+                        <outlet property="passwordInputView" destination="Lfa-Zb-seu" id="l7Y-Ud-ex5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zPj-er-ADA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="640.57971014492762" y="205.58035714285714"/>
+            <point key="canvasLocation" x="622" y="206"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ellipses.bubble" catalog="system" width="64" height="54"/>
+        <image name="ic_mail_outline" width="24" height="24"/>
+        <image name="ic_mail_outline_white" width="24" height="24"/>
+        <image name="ic_perm_identity_white" width="24" height="24"/>
+    </resources>
+    <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

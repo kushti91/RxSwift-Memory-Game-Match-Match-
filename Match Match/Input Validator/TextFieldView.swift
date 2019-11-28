@@ -36,6 +36,13 @@ open class TextFieldView: UIView {
     }
     
     @IBInspectable
+    public var messageLblColor: UIColor = UIColor.blue  {
+      
+       didSet {
+            messageLbl.backgroundColor = messageLblColor
+        }
+    }
+    @IBInspectable
     public var titleText: String? {
         get {
             return titleLbl.text
@@ -260,11 +267,11 @@ open class TextFieldView: UIView {
     }
 
     private func decorateInvalidUI() {
-        messageLbl.textColor = UIColor.red
-        messageLbl.backgroundColor = UIColor(white: 1, alpha: 0.5)
+        messageLbl.textColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)             //UIColor.red
+        messageLbl.backgroundColor = .clear//UIColor(white: 1, alpha: 0.5)
         self.rightImage = nil
         textField.layer.borderWidth = 1.0
-        textField.layer.borderColor = UIColor.red.cgColor
+        textField.layer.borderColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1).cgColor //UIColor.red.cgColor
     }
     
     public func isValidationPass() -> Bool {

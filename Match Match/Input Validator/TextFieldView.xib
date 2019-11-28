@@ -18,51 +18,52 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="MainView">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cGd-S5-3M3">
-                    <rect key="frame" x="20" y="4" width="335" height="20"/>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cGd-S5-3M3">
+                    <rect key="frame" x="20" y="4" width="335" height="3"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="20" id="aDU-Sd-7Y1"/>
+                        <constraint firstAttribute="height" constant="3" id="aDU-Sd-7Y1"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hhb-NM-RVs">
-                    <rect key="frame" x="20" y="32" width="335" height="36"/>
+                    <rect key="frame" x="20" y="4" width="335" height="50"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="36" id="8Uu-C7-R5W"/>
+                        <constraint firstAttribute="height" constant="50" id="8Uu-C7-R5W"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CmM-OO-Qaz">
-                    <rect key="frame" x="20" y="66" width="335" height="16"/>
+                    <rect key="frame" x="20" y="58" width="335" height="16"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="16" id="jrC-l2-pme"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <nil key="textColor"/>
+                    <color key="textColor" red="0.8940987587" green="0.38620328900000001" blue="0.25906759499999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="CmM-OO-Qaz" secondAttribute="trailing" constant="20" id="HyC-Ye-Snk"/>
-                <constraint firstItem="CmM-OO-Qaz" firstAttribute="top" secondItem="Hhb-NM-RVs" secondAttribute="bottom" constant="-2" id="ImL-2I-Z4U"/>
+                <constraint firstItem="CmM-OO-Qaz" firstAttribute="top" secondItem="Hhb-NM-RVs" secondAttribute="bottom" constant="4" id="ImL-2I-Z4U"/>
                 <constraint firstItem="CmM-OO-Qaz" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="KAZ-o5-c5t"/>
                 <constraint firstItem="cGd-S5-3M3" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="Qm6-gZ-LS8"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="cGd-S5-3M3" secondAttribute="trailing" constant="20" id="Sls-92-23C"/>
-                <constraint firstItem="Hhb-NM-RVs" firstAttribute="top" secondItem="cGd-S5-3M3" secondAttribute="bottom" constant="8" id="V1h-jF-aLs"/>
+                <constraint firstItem="Hhb-NM-RVs" firstAttribute="top" secondItem="cGd-S5-3M3" secondAttribute="bottom" constant="-3" id="V1h-jF-aLs"/>
                 <constraint firstItem="Hhb-NM-RVs" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="f2B-Cl-l5m"/>
                 <constraint firstItem="cGd-S5-3M3" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="4" id="jQv-0Q-UAt"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Hhb-NM-RVs" secondAttribute="trailing" constant="20" id="ypB-m5-8En"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="-52" y="-365.21739130434787"/>
+            <point key="canvasLocation" x="-52" y="-372.41379310344831"/>
         </view>
     </objects>
 </document>
