@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,7 +22,13 @@
 		410F960D238FC8CC0028ECC5 /* TextFieldViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410F960C238FC8CC0028ECC5 /* TextFieldViewStyle.swift */; };
 		410F960F238FC8F80028ECC5 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410F960E238FC8F80028ECC5 /* Validator.swift */; };
 		410F9611238FEB8A0028ECC5 /* Comic_Andy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 410F9610238FEB890028ECC5 /* Comic_Andy.ttf */; };
+		412BE63823905FBB00ABFD5D /* RegisterationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BE63723905FBB00ABFD5D /* RegisterationViewModel.swift */; };
+		412BE63A23914A3000ABFD5D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 412BE63923914A3000ABFD5D /* GoogleService-Info.plist */; };
+		412BE63C2391779900ABFD5D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BE63B2391779900ABFD5D /* HomeViewController.swift */; };
+		412BE63F239187F400ABFD5D /* UIviewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BE63E239187F400ABFD5D /* UIviewControllerExt.swift */; };
+		412BE6412391B8BD00ABFD5D /* CardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BE6402391B8BD00ABFD5D /* CardViewCell.swift */; };
 		41950D572390174E00741D80 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41950D562390174E00741D80 /* LoginViewModel.swift */; };
+		41950D59239024C700741D80 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41950D58239024C700741D80 /* User.swift */; };
 		A691BC53ECB917D5717942C7 /* Pods_Match_Match.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07044D807C8D10904B36FF9D /* Pods_Match_Match.framework */; };
 		BB706356B35727456B3D0963 /* Pods_Match_MatchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B4F577703826E6A89593EE2 /* Pods_Match_MatchTests.framework */; };
 		DA8D517C208CB9946AED400E /* Pods_Match_Match_Match_MatchUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3154494867016758A336EC61 /* Pods_Match_Match_Match_MatchUITests.framework */; };
@@ -71,7 +77,13 @@
 		410F960C238FC8CC0028ECC5 /* TextFieldViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldViewStyle.swift; sourceTree = "<group>"; };
 		410F960E238FC8F80028ECC5 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		410F9610238FEB890028ECC5 /* Comic_Andy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Comic_Andy.ttf; sourceTree = "<group>"; };
+		412BE63723905FBB00ABFD5D /* RegisterationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationViewModel.swift; sourceTree = "<group>"; };
+		412BE63923914A3000ABFD5D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		412BE63B2391779900ABFD5D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		412BE63E239187F400ABFD5D /* UIviewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIviewControllerExt.swift; sourceTree = "<group>"; };
+		412BE6402391B8BD00ABFD5D /* CardViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewCell.swift; sourceTree = "<group>"; };
 		41950D562390174E00741D80 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		41950D58239024C700741D80 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		675DEB7E9FF97CD5AD9EDDA3 /* Pods-Match Match-Match MatchUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Match Match-Match MatchUITests.release.xcconfig"; path = "Target Support Files/Pods-Match Match-Match MatchUITests/Pods-Match Match-Match MatchUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6B4F577703826E6A89593EE2 /* Pods_Match_MatchTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Match_MatchTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7671A8698812FA1F89F55D7A /* Pods-Match MatchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Match MatchTests.debug.xcconfig"; path = "Target Support Files/Pods-Match MatchTests/Pods-Match MatchTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -117,7 +129,6 @@
 				7671A8698812FA1F89F55D7A /* Pods-Match MatchTests.debug.xcconfig */,
 				24995B2A22BF73B944C3C823 /* Pods-Match MatchTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -146,6 +157,7 @@
 		410F95CD238D16BC0028ECC5 /* Match Match */ = {
 			isa = PBXGroup;
 			children = (
+				412BE63D239187E000ABFD5D /* Extensions */,
 				410F9607238FC8680028ECC5 /* Input Validator */,
 				410F95FE238E741C0028ECC5 /* Model */,
 				410F95FF238E74290028ECC5 /* View */,
@@ -156,6 +168,7 @@
 				410F95D7238D16BD0028ECC5 /* Assets.xcassets */,
 				410F9603238FC74E0028ECC5 /* IconSet.xcassets */,
 				410F9610238FEB890028ECC5 /* Comic_Andy.ttf */,
+				412BE63923914A3000ABFD5D /* GoogleService-Info.plist */,
 				410F95D9238D16BD0028ECC5 /* LaunchScreen.storyboard */,
 				410F95DC238D16BD0028ECC5 /* Info.plist */,
 			);
@@ -183,7 +196,7 @@
 		410F95FE238E741C0028ECC5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				41950D562390174E00741D80 /* LoginViewModel.swift */,
+				41950D58239024C700741D80 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -193,6 +206,8 @@
 			children = (
 				410F9601238FBFC60028ECC5 /* LoginViewController.swift */,
 				410F95D2238D16BC0028ECC5 /* RegisterationViewController.swift */,
+				412BE63B2391779900ABFD5D /* HomeViewController.swift */,
+				412BE6402391B8BD00ABFD5D /* CardViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -200,6 +215,8 @@
 		410F9600238E74350028ECC5 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				41950D562390174E00741D80 /* LoginViewModel.swift */,
+				412BE63723905FBB00ABFD5D /* RegisterationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -213,6 +230,14 @@
 				410F9605238FC7D90028ECC5 /* TextFieldView.xib */,
 			);
 			path = "Input Validator";
+			sourceTree = "<group>";
+		};
+		412BE63D239187E000ABFD5D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				412BE63E239187F400ABFD5D /* UIviewControllerExt.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		49E2E9252A8F35A68E0539EC /* Frameworks */ = {
@@ -341,6 +366,7 @@
 				410F95D8238D16BD0028ECC5 /* Assets.xcassets in Resources */,
 				410F9611238FEB8A0028ECC5 /* Comic_Andy.ttf in Resources */,
 				410F95D6238D16BC0028ECC5 /* Main.storyboard in Resources */,
+				412BE63A23914A3000ABFD5D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,10 +512,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				410F960B238FC89F0028ECC5 /* TextFieldView.swift in Sources */,
+				412BE63823905FBB00ABFD5D /* RegisterationViewModel.swift in Sources */,
 				410F960D238FC8CC0028ECC5 /* TextFieldViewStyle.swift in Sources */,
 				410F960F238FC8F80028ECC5 /* Validator.swift in Sources */,
 				410F9602238FBFC60028ECC5 /* LoginViewController.swift in Sources */,
 				41950D572390174E00741D80 /* LoginViewModel.swift in Sources */,
+				412BE6412391B8BD00ABFD5D /* CardViewCell.swift in Sources */,
+				412BE63F239187F400ABFD5D /* UIviewControllerExt.swift in Sources */,
+				41950D59239024C700741D80 /* User.swift in Sources */,
+				412BE63C2391779900ABFD5D /* HomeViewController.swift in Sources */,
 				410F95D3238D16BC0028ECC5 /* RegisterationViewController.swift in Sources */,
 				410F95CF238D16BC0028ECC5 /* AppDelegate.swift in Sources */,
 				410F95D1238D16BC0028ECC5 /* SceneDelegate.swift in Sources */,
