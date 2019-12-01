@@ -145,16 +145,16 @@ struct PhoneNumberValidator: InputValidator {
 }
 
 enum ValidationMessage: String {
-    case emptyField = "Field can't be empty"
-    case invalidEmail = "Invalid email addresses"
-    case atleastEightChars = "Atleast 8 Characters Length"
+    case emptyField          = "Field can't be empty"
+    case invalidEmail        = "Invalid email addresses"
+    case atleastEightChars   = "Atleast 8 Characters Length"
     case atleastOneUpperCaseLetter = "Atleast 1 uppercase letter"
     case atleastOneLowerCaseLetter = "Atleast 1 lowercase letter"
     case atleastOneSpecialCaseLetter = "Atleast 1 special character[Valid: !@#$%^&*]"
-    case invalidPassword = "Must be 8 Characters. including 1 upper, lower, digit & special symbol"
-    case noDigitFound = "Must have 1 digit"
-    case correct = "Accepted"
-    case notMatched = "Does not Match"
-    case passwordRule = "Must be 8 Ch"
-    case notAValidInput = "Not a Valid Input"
+    case invalidPassword     = "Must be 8 Characters. including 1 upper, lower, digit & special symbol"
+    case noDigitFound        = "Must have 1 digit"
+    case correct             = "Accepted"
+    case notMatched          = "Does not Match"
+    case passwordRule        = "Must be 8 Ch"
+    case notAValidInput      = "Not a Valid Input"
 }

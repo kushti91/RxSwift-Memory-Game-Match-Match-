@@ -27,6 +27,9 @@
 		412BE63C2391779900ABFD5D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BE63B2391779900ABFD5D /* HomeViewController.swift */; };
 		412BE63F239187F400ABFD5D /* UIviewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BE63E239187F400ABFD5D /* UIviewControllerExt.swift */; };
 		412BE6412391B8BD00ABFD5D /* CardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BE6402391B8BD00ABFD5D /* CardViewCell.swift */; };
+		412BE6432391C44E00ABFD5D /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BE6422391C44E00ABFD5D /* Card.swift */; };
+		412BE6452391C5CD00ABFD5D /* ArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BE6442391C5CD00ABFD5D /* ArrayExt.swift */; };
+		412BE6472392717800ABFD5D /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BE6462392717800ABFD5D /* CardViewModel.swift */; };
 		41950D572390174E00741D80 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41950D562390174E00741D80 /* LoginViewModel.swift */; };
 		41950D59239024C700741D80 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41950D58239024C700741D80 /* User.swift */; };
 		A691BC53ECB917D5717942C7 /* Pods_Match_Match.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07044D807C8D10904B36FF9D /* Pods_Match_Match.framework */; };
@@ -82,6 +85,9 @@
 		412BE63B2391779900ABFD5D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		412BE63E239187F400ABFD5D /* UIviewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIviewControllerExt.swift; sourceTree = "<group>"; };
 		412BE6402391B8BD00ABFD5D /* CardViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewCell.swift; sourceTree = "<group>"; };
+		412BE6422391C44E00ABFD5D /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		412BE6442391C5CD00ABFD5D /* ArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExt.swift; sourceTree = "<group>"; };
+		412BE6462392717800ABFD5D /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		41950D562390174E00741D80 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		41950D58239024C700741D80 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		675DEB7E9FF97CD5AD9EDDA3 /* Pods-Match Match-Match MatchUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Match Match-Match MatchUITests.release.xcconfig"; path = "Target Support Files/Pods-Match Match-Match MatchUITests/Pods-Match Match-Match MatchUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -197,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				41950D58239024C700741D80 /* User.swift */,
+				412BE6422391C44E00ABFD5D /* Card.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -217,6 +224,7 @@
 			children = (
 				41950D562390174E00741D80 /* LoginViewModel.swift */,
 				412BE63723905FBB00ABFD5D /* RegisterationViewModel.swift */,
+				412BE6462392717800ABFD5D /* CardViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -236,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				412BE63E239187F400ABFD5D /* UIviewControllerExt.swift */,
+				412BE6442391C5CD00ABFD5D /* ArrayExt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -515,12 +524,15 @@
 				412BE63823905FBB00ABFD5D /* RegisterationViewModel.swift in Sources */,
 				410F960D238FC8CC0028ECC5 /* TextFieldViewStyle.swift in Sources */,
 				410F960F238FC8F80028ECC5 /* Validator.swift in Sources */,
+				412BE6472392717800ABFD5D /* CardViewModel.swift in Sources */,
 				410F9602238FBFC60028ECC5 /* LoginViewController.swift in Sources */,
 				41950D572390174E00741D80 /* LoginViewModel.swift in Sources */,
 				412BE6412391B8BD00ABFD5D /* CardViewCell.swift in Sources */,
 				412BE63F239187F400ABFD5D /* UIviewControllerExt.swift in Sources */,
 				41950D59239024C700741D80 /* User.swift in Sources */,
+				412BE6432391C44E00ABFD5D /* Card.swift in Sources */,
 				412BE63C2391779900ABFD5D /* HomeViewController.swift in Sources */,
+				412BE6452391C5CD00ABFD5D /* ArrayExt.swift in Sources */,
 				410F95D3238D16BC0028ECC5 /* RegisterationViewController.swift in Sources */,
 				410F95CF238D16BC0028ECC5 /* AppDelegate.swift in Sources */,
 				410F95D1238D16BC0028ECC5 /* SceneDelegate.swift in Sources */,

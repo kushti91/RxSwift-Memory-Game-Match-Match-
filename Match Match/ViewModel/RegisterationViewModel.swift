@@ -15,7 +15,7 @@ import Firebase
 class RegisterationViewModel {
     //MARK: - Properties
     public var nickName: String? {didSet {checkFormValidity()}}
-    public var email: String?    {didSet {checkFormValidity()}}
+    public var email:    String? {didSet {checkFormValidity()}}
     public var password: String? {didSet {checkFormValidity()}}
     
     //MARK: - FilePrivates
