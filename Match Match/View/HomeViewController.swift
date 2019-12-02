@@ -37,19 +37,19 @@ class HomeViewController: UIViewController {
     //MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
+
         if Auth.auth().currentUser == nil {
             presentLoginController()
         }
         
         collectionView.rx.setDelegate(self).disposed(by: disposeBag)
         setupGradentLayer()
-        navigationController?.navigationBar.isHidden = true
         setupBindings()
         cardViewModel.fetchData()
-        //setupCellConfiguration()
         
- 
     }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         gradientLayer.frame = view.frame
@@ -60,7 +60,6 @@ class HomeViewController: UIViewController {
     }
     
     //MARK: - File Privates
-
     fileprivate func presentLoginController() {
         DispatchQueue.main.async {
             let loginController = LoginViewController.fromStroyBoard(identifier: "loginController")
@@ -78,19 +77,18 @@ class HomeViewController: UIViewController {
         hud.textLabel.text = "Downloading"
         hud.detailTextLabel.text = message
         hud.show(in: self.view)
-        //hud.dismiss(afterDelay: 4)
     }
     
     //MARK: - Rx
     
-
     func setupCellConfiguration() {
          let observableCard = Observable<[Card]>.just(Card.allCards)
           observableCard.bind(to:
             collectionView.rx
             .items(cellIdentifier: "cardCell" , cellType: CardViewCell.self))  {
                 item, card, cell in
-                 cell.flipCard(false, animted: false)
+                 cell.flipCard(false, animted: true)
+                cell.card = Card.allCards[item]
         }.disposed(by: disposeBag)
         
         
@@ -98,23 +96,75 @@ class HomeViewController: UIViewController {
     
     
     func setupCellTapHandling() {
-//        collectionView.rx.modelSelected(CardViewCell.self)
-//            .subscribe(onNext: {[unowned self] (item) in
-//
-//            }).disposed(by: disposeBag)
         
+        Observable
+            .zip( collectionView
+            .rx
+            .itemSelected
+            ,collectionView
+            .rx
+            .modelSelected(Card.self))
+            .bind{ [unowned self] indexPath, card in
+                let cell = self.collectionView.cellForItem(at: indexPath) as! CardViewCell
+                if cell.isShown {return}
+                self.cardViewModel.didSelectCard(card)
+                print(card.id)
+            }
+            .disposed(by: disposeBag)
+        
+        
+        //did show a card
+        cardViewModel
+            .shownCard
+            .subscribe(onNext: { [unowned self] (cards) in
+
+            })
+            .disposed(by: disposeBag)
+        
+        
+        //card unmatched hide it
+        cardViewModel
+            .hiddenCards
+            .subscribe(onNext: { [unowned self] (cards) in
+         
+            })
+            .disposed(by: disposeBag)
     }
 
 // MARK: - Bindings
 
 private func setupBindings() {
-    cardViewModel.isLoading
+    
+    //Binding to fetching state
+    
+    cardViewModel
+        .isLoading
+        .observeOn(MainScheduler.instance)
         .subscribe(onNext:{ [unowned self] value in
             if value {
                 self.showHud(withMessage: "Please wait..")
             } else {
                 self.hud.dismiss(afterDelay: 1)
                 self.setupCellConfiguration()
+                self.setupCellTapHandling()
+            }
+        })
+        .disposed(by: disposeBag)
+    
+    
+    // observing errors to show
+    
+    cardViewModel
+        .error
+        .observeOn(MainScheduler.instance)
+        .subscribe(onNext: { (error) in
+            switch error {
+            case .firebaseError(let message):
+                self.showHud(withMessage: message)
+                self.hud.dismiss(afterDelay: 3)
+            case .downloaderError(let message):
+                self.showHud(withMessage: message)
+                self.hud.dismiss(afterDelay: 3)
             }
         })
         .disposed(by: disposeBag)
@@ -122,8 +172,7 @@ private func setupBindings() {
 }
 }
 
-extension HomeViewController: UICollectionViewDelegateFlowLayout {
-
+extension HomeViewController: UICollectionViewDelegateFlowLayout{
     // Collection view flow layout setup
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let paddingSpace = Int(sectionInsets.left) * 4

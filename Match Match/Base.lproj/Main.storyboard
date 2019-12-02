@@ -210,7 +210,7 @@
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9Bu-Vk-xB6">
                                 <rect key="frame" x="8" y="189" width="398" height="591"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xVl-ZP-aqr">
                                     <size key="itemSize" width="74" height="86"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -218,10 +218,10 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cardCell" id="U25-l9-NTN" customClass="CardViewCell" customModule="Match_Match" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" contentMode="center" reuseIdentifier="cardCell" id="U25-l9-NTN" customClass="CardViewCell" customModule="Match_Match" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="wxy-1t-YEb" customClass="CardViewCell" customModule="Match_Match" customModuleProvider="target">
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="wxy-1t-YEb" customClass="CardViewCell" customModule="Match_Match" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -243,11 +243,11 @@
                                                 <constraint firstItem="p6e-Ua-jth" firstAttribute="top" secondItem="wxy-1t-YEb" secondAttribute="top" id="oiQ-S3-hvX"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <color key="backgroundColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <size key="customSize" width="80" height="80"/>
                                         <connections>
-                                            <outlet property="backImageView" destination="3OH-6D-KCE" id="4FE-Un-yNe"/>
-                                            <outlet property="frontImageView" destination="p6e-Ua-jth" id="hxj-Pe-cIe"/>
+                                            <outlet property="backImageView" destination="p6e-Ua-jth" id="LPo-uA-9ls"/>
+                                            <outlet property="frontImageView" destination="3OH-6D-KCE" id="cHP-Xx-Ryv"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -296,12 +296,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X3O-XS-bxF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2.8985507246376816" y="-163.85869565217394"/>
+            <point key="canvasLocation" x="2.8985507246376816" y="-164.0625"/>
         </scene>
         <!--Login NavCont-->
         <scene sceneID="60j-1v-gMl">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pVi-xx-iNS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="loginNav" title="Login NavCont" id="Nzk-hT-vPa" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1Fh-4g-gsN">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -315,6 +314,7 @@
                         <segue destination="JhC-Rt-fhN" kind="relationship" relationship="rootViewController" id="z47-f0-TB0"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pVi-xx-iNS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="751" y="206"/>
         </scene>

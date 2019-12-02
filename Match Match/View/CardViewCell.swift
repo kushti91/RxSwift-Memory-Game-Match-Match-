@@ -12,19 +12,26 @@ class CardViewCell: UICollectionViewCell {
     
     //MARK: - Properties
     static let identifier = "cellId"
-    private var isShown: Bool = false
-    public var card: Card? {
-        didSet{
-            
-        }
-    }
+    public var isShown: Bool = false
+  
     
     //MARK: - IB Outlets
     @IBOutlet weak var backImageView :  UIImageView!
     @IBOutlet weak var frontImageView: UIImageView!
     
+    public var card: Card? {
+          didSet{
+              
+              guard let card = card else { return }
+              backImageView.image = card.image
+              frontImageView.layer.cornerRadius = 5.0
+              backImageView.layer.cornerRadius = 5.0
 
-    
+              frontImageView.layer.masksToBounds = true
+              backImageView.layer.masksToBounds = true
+          
+      }
+    }
     //MARK: - Helper Methods
     fileprivate func setupImageViews(){
         frontImageView.layer.cornerRadius = 5.0
@@ -33,8 +40,8 @@ class CardViewCell: UICollectionViewCell {
         backImageView.layer.masksToBounds = true
     }
     public func flipCard(_ show: Bool, animted: Bool) {
-        frontImageView.isHidden = false
-        backImageView.isHidden = false
+//        frontImageView.isHidden = false
+//        backImageView.isHidden = false
         isShown = show
         
         if animted {

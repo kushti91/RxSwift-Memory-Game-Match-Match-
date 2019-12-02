@@ -12,16 +12,33 @@ import RxSwift
 import Firebase
 import SDWebImage
  
+public enum HomeError {
+       case firebaseError(String)
+       case downloaderError(String)
+   }
+
 class CardViewModel {
    
     var cards:[Card] = [Card]()
     var cardsShown:[Card] = [Card]()
     var isPlaying: Bool = false
+    
+    
     fileprivate let downloader = SDWebImageDownloader()
+    
 
+    //MARK: - Observables
+    
+    public let isLoading: PublishSubject<Bool> = PublishSubject()
+    public var shownCard: PublishSubject<[Card]> = PublishSubject()
+    public var hiddenCards: PublishSubject<[Card]?> = PublishSubject()
+    public let error : PublishSubject<HomeError> = PublishSubject()
+
+    
     // MARK: - Methods
     
     func newGame(cardsArray:[Card]) -> [Card] {
+        
         cards = shuffleCards(cards: cardsArray)
         isPlaying = true
     
@@ -29,9 +46,6 @@ class CardViewModel {
         
         return cards
     }
-    //setIslaoding()
-    /// Indicating the state of the viewmodel
-    public var isLoading: PublishSubject<Bool> = PublishSubject()
 
     public func fetchData() {
         isLoading.onNext(true)
@@ -43,10 +57,11 @@ class CardViewModel {
             }
         }
     }
+    
     fileprivate func fetchImagesFromFireStore(completion: @escaping(_ finshed: Bool)-> ()) {
         Firestore.firestore().collection("images").document("imageUrls").getDocument { (snapshot, error) in
             if let error = error {
-                print(error.localizedDescription)
+                self.error.onNext(.firebaseError(error.localizedDescription))
                 completion(false)
                 return
             }
@@ -57,7 +72,7 @@ class CardViewModel {
               
                 self.downloader.downloadImage(with: imageUrl) { (image, _, error, _) in
                     if let error = error {
-                        print(error.localizedDescription)
+                         self.error.onNext(.downloaderError(error.localizedDescription))
                         completion(false)
                         return
                     }
@@ -68,7 +83,6 @@ class CardViewModel {
                     cnt += 1
                     cnt > dic!.count ? completion(true) : completion(false);
                     // to inform that the download has completed}
-                   
                     }
             })
         }
@@ -102,7 +116,7 @@ class CardViewModel {
         guard let card = card else { return }
         
        // delegate?.memoryGame(self, showCards: [card])
-        
+        shownCard.onNext([card])
         if unmatchedCardShown() {
             let unmatched = unmatchedCard()!
             
@@ -113,6 +127,7 @@ class CardViewModel {
                 
                 let delayTime = DispatchTime.now() + 1.0
                 DispatchQueue.main.asyncAfter(deadline: delayTime) {
+                    self.hiddenCards.onNext([card, secondCard])
                     //self.delegate?.memoryGame(self, hideCards:[card, secondCard])
                 }
             }
