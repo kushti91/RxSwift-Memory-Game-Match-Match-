@@ -32,11 +32,37 @@ class RegisterationViewModel {
                    completion(error)
                  return
                }
-             completion(nil)
+           
+             let uid = Auth.auth().currentUser?.uid ?? ""
+            guard let nickName = self.nickName else {return}
+            let docData = ["nickName": nickName , "id": uid, "highScore": 0 , "level": 1] as [String : Any]
+             Firestore.firestore().collection("users").document(uid).setData(docData as [String : Any]) { (error) in
+                 if let error = error {
+                     completion(error)
+                     print("error")
+                     return
+                 }
+                 completion(nil)
+             self.observableIsRegistering.accept(false)
         }
-        self.observableIsRegistering.accept(false)
-     
      }
+    }
+    
+    fileprivate func saveInfoToFireStore( completion: @escaping(Error?) -> ())
+    {
+        let uid = Auth.auth().currentUser?.uid ?? ""
+        guard let nickName = nickName else {return}
+        let docData = ["nickName": nickName , "id": uid, "highScore": "1"] as [String : Any]
+        Firestore.firestore().collection("users").document(uid).setData(docData as [String : Any]) { (error) in
+            if let error = error {
+                completion(error)
+                print("error")
+                return
+            }
+            print("Registered")
+            completion(nil)
+        }
+    }
     
     //MARK: - Rx VARs
     public var observableIsFormValid = BehaviorRelay<Bool>(value: false)

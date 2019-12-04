@@ -19,21 +19,18 @@ public enum HomeError {
 
 class CardViewModel {
    
-    var cards:[Card] = [Card]()
-    var cardsShown:[Card] = [Card]()
-    var isPlaying: Bool = false
-    
-    
+    public var cards:[Card] = [Card]()
+    public var cardsShown:[Card] = [Card]()
+    public var isPlaying: Bool = false
     fileprivate let downloader = SDWebImageDownloader()
-    
 
     //MARK: - Observables
     
-    public let isLoading: PublishSubject<Bool> = PublishSubject()
-    public var shownCard: PublishSubject<[Card]> = PublishSubject()
-    public var hiddenCards: PublishSubject<[Card]?> = PublishSubject()
-    public let error : PublishSubject<HomeError> = PublishSubject()
-
+    public let isLoading:   PublishSubject<Bool>      = PublishSubject()
+    public let shownCards:  PublishSubject<[Card]>    = PublishSubject()
+    public let hiddenCards: PublishSubject<[Card]>    = PublishSubject()
+    public let user :       PublishSubject<User>      = PublishSubject()
+    public let error :      PublishSubject<HomeError> = PublishSubject()
     
     // MARK: - Methods
     
@@ -50,9 +47,12 @@ class CardViewModel {
     public func fetchData() {
         isLoading.onNext(true)
         print("fetching strted")
+        fetchUserInfo()
         fetchImagesFromFireStore { isFinshed in
             if isFinshed {
             print("Fetching ended")
+                self.cards = self.shuffleCards(cards: self.cards)
+                self.isPlaying = true
                 self.isLoading.onNext(false)
             }
         }
@@ -79,13 +79,28 @@ class CardViewModel {
                     // in case of success
                     guard let image = image else {return}
                     let card = Card(image: image )
+                    let cardCopy = card.copy()
                     self.cards.append(card)
+                    self.cards.append(cardCopy)
                     cnt += 1
                     cnt > dic!.count ? completion(true) : completion(false);
                     // to inform that the download has completed}
                     }
             })
         }
+    }
+    
+    fileprivate func fetchUserInfo() {
+        let uid = Auth.auth().currentUser?.uid ?? ""
+        Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, error) in
+            if let error = error {
+                self.error.onNext(.firebaseError(error.localizedDescription))
+                return
+            }
+            guard let dataDic = snapshot?.data() else {return}
+            self.user.onNext(User(dictionary: dataDic))
+        }
+       
     }
     
     func restartGame() {
@@ -95,7 +110,7 @@ class CardViewModel {
         cardsShown.removeAll()
     }
 
-    func cardAtIndex(_ index: Int) -> Card? {
+    public func cardAtIndex(_ index: Int) -> Card? {
         if cards.count > index {
             return cards[index]
         } else {
@@ -103,20 +118,19 @@ class CardViewModel {
         }
     }
 
-    func indexForCard(_ card: Card) -> Int? {
+    public func indexForCard(_ card: Card) -> Int? {
         for index in 0...cards.count-1 {
-            if card == cards[index] {
+            if card === cards[index] {
                 return index
             }
         }
         return nil
     }
 
-    func didSelectCard(_ card: Card?) {
+    public func didSelectCard(_ card: Card?) {
         guard let card = card else { return }
         
-       // delegate?.memoryGame(self, showCards: [card])
-        shownCard.onNext([card])
+        shownCards.onNext([card])
         if unmatchedCardShown() {
             let unmatched = unmatchedCard()!
             
@@ -128,7 +142,6 @@ class CardViewModel {
                 let delayTime = DispatchTime.now() + 1.0
                 DispatchQueue.main.asyncAfter(deadline: delayTime) {
                     self.hiddenCards.onNext([card, secondCard])
-                    //self.delegate?.memoryGame(self, hideCards:[card, secondCard])
                 }
             }
             
@@ -146,24 +159,15 @@ class CardViewModel {
         //delegate?.memoryGameDidEnd(self)
     }
     
-    /**
-     Indicates if the card selected is unmatched
-     (the first one selected in the current turn).
-     - Returns: An array of shuffled cards.
-     */
     fileprivate func unmatchedCardShown() -> Bool {
         return cardsShown.count % 2 != 0
     }
     
-    /**
-     Reads the last element in **cardsShown** array.
-     - Returns: An unmatched card.
-     */
     fileprivate func unmatchedCard() -> Card? {
         let unmatchedCard = cardsShown.last
         return unmatchedCard
     }
-
+    
     fileprivate func shuffleCards(cards:[Card]) -> [Card] {
         var randomCards = cards
         randomCards.shuffle()

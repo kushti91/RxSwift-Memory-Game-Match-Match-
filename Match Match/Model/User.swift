@@ -12,11 +12,13 @@ struct User {
     let id: String?
     let nickName: String?
     let highScore: Int?
+    let level: Int?
     
     init(dictionary: [String: Any]) {
         self.id = dictionary["id"] as? String ?? ""
         self.nickName = dictionary["nickName"] as? String ?? ""
         self.highScore = dictionary["highScore"] as? Int ?? 0
+        self.level = dictionary["level"] as? Int ?? 0
         
     }
 }

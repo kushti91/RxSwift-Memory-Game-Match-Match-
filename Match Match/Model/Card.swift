@@ -8,7 +8,9 @@
 
 import UIKit
 
-struct Card: Equatable {
+class Card {
+   
+    
     var id: String
     var isShown: Bool = false
     var image: UIImage!
