@@ -134,7 +134,7 @@ class HomeViewController: UIViewController {
     }
     fileprivate func setupCellConfiguration() {
      
-        let observableCard = Observable<[Card]>.just(cardViewModel.cards)
+        let observableCard = Observable<[Card]>.just(cardViewModel.cardaForeLevel(level: currentLevel))
           observableCard.bind(to:
             collectionView.rx
             .items(cellIdentifier: "cardCell" , cellType: CardViewCell.self))  {

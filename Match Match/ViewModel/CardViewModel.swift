@@ -30,6 +30,7 @@ class CardViewModel {
     public let shownCards:  PublishSubject<[Card]>    = PublishSubject()
     public let hiddenCards: PublishSubject<[Card]>    = PublishSubject()
     public let user :       PublishSubject<User>      = PublishSubject()
+    public let levelPassed: PublishSubject<Bool>      = PublishSubject()
     public let error :      PublishSubject<HomeError> = PublishSubject()
     
     // MARK: - Methods
@@ -79,9 +80,7 @@ class CardViewModel {
                     // in case of success
                     guard let image = image else {return}
                     let card = Card(image: image )
-                    let cardCopy = card.copy()
                     self.cards.append(card)
-                    self.cards.append(cardCopy)
                     cnt += 1
                     cnt > dic!.count ? completion(true) : completion(false);
                     // to inform that the download has completed}
@@ -103,6 +102,29 @@ class CardViewModel {
        
     }
     
+    public func cardaForeLevel(level: Int) -> [Card] {
+        switch level {
+        case 1: return generateCards(index: 2)
+        case 2: return generateCards(index: 3)
+        case 3: return generateCards(index: 3)
+        case 4: return generateCards(index: 7)
+        default:
+            return [Card]()
+        }
+    }
+    var cardLevel = [Card]()
+    fileprivate func generateCards(index: Int) -> [Card] {
+       
+        (0...index).forEach { (idx) in
+            cardLevel.append(cards[idx])
+            print( cards[idx].id)
+            cardLevel.append(cardLevel.last!.copy())
+            print(cardLevel.last!.id)
+        }
+        print(cardLevel.count)
+         return cardLevel
+    }
+    
     func restartGame() {
         isPlaying = false
         
@@ -111,16 +133,16 @@ class CardViewModel {
     }
 
     public func cardAtIndex(_ index: Int) -> Card? {
-        if cards.count > index {
-            return cards[index]
+        if cardLevel.count > index {
+            return cardLevel[index]
         } else {
             return nil
         }
     }
 
     public func indexForCard(_ card: Card) -> Int? {
-        for index in 0...cards.count-1 {
-            if card === cards[index] {
+        for index in 0...cardLevel.count-1 {
+            if card === cardLevel[index] {
                 return index
             }
         }
