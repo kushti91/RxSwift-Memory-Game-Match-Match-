@@ -12,38 +12,81 @@ import RxSwift
 import Firebase
 import SDWebImage
  
-public enum HomeError {
+public enum HomeError
+    {
        case firebaseError(String)
        case downloaderError(String)
-   }
+    }
 
 class CardViewModel {
    
-    public var cards:[Card] = [Card]()
-    public var cardsShown:[Card] = [Card]()
-    public var isPlaying: Bool = false
-    fileprivate let downloader = SDWebImageDownloader()
-
+    public var cards:[Card]       = [Card]()
+    public var cardsShown:[Card]  = [Card]()
+    fileprivate let downloader    = SDWebImageDownloader()
+    fileprivate let disposalBag   = DisposeBag()
+    
+    fileprivate var timeout: Int = 180
+    fileprivate  var runCount  = 0
+    fileprivate var isTimedOut = false
+    public var isPlaying: Bool = false {
+        didSet {
+           setupTimer()
+        }
+    }
     //MARK: - Observables
     
-    public let isLoading:   PublishSubject<Bool>      = PublishSubject()
-    public let shownCards:  PublishSubject<[Card]>    = PublishSubject()
-    public let hiddenCards: PublishSubject<[Card]>    = PublishSubject()
-    public let user :       PublishSubject<User>      = PublishSubject()
-    public let levelPassed: PublishSubject<Bool>      = PublishSubject()
-    public let error :      PublishSubject<HomeError> = PublishSubject()
-    
+    public let isLoading: PublishSubject <Bool>  = PublishSubject()
+    public let shownCards: PublishSubject <[Card]> = PublishSubject()
+    public let hiddenCards: PublishSubject <[Card]> = PublishSubject() //REFACTOR use closure
+    public let user: PublishSubject <User> = PublishSubject()
+    public let levelPassed: PublishSubject <Bool> = PublishSubject()
+    public let error: PublishSubject <HomeError> = PublishSubject()
+    public let levelUp: PublishSubject <((Bool, Int) -> ())> = PublishSubject()
+    /// isPlaying: Bool , timeLeft: int,  isTimedOut: Bool?
+    public let timerControl: PublishSubject <((isPlaying: Bool?,timeLeft: Int, isTimedOut: Bool?) )> = PublishSubject()
+      
     // MARK: - Methods
-    
-    func newGame(cardsArray:[Card]) -> [Card] {
-        
-        cards = shuffleCards(cards: cardsArray)
-        isPlaying = true
-    
-       // delegate?.memoryGameDidStart(self)
-        
-        return cards
+
+    fileprivate var   timer = Timer()
+    fileprivate func setupTimer() {
+        if !isPlaying {
+            stopTimer(timer: timer)
+            
+        } else {
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerUpdate), userInfo: nil, repeats: true)
+            
+        }
     }
+    
+    fileprivate func stopTimer(timer : Timer) {
+        timer.invalidate()
+    
+        timerControl.onNext((false,timeout, isTimedOut))
+
+    }
+    
+    @objc fileprivate func timerUpdate(timer: Timer) {
+            runCount += 1
+            timeout -= 1
+        //print(timeout)
+            timerControl.onNext((true,timeout, false))
+               if self.runCount >= 180 ||  self.runCount < 0 {
+                self.isTimedOut = true
+                stopTimer(timer: timer)
+               }
+           }
+    
+ 
+  
+//    func newGame(cardsArray:[Card]) -> [Card] {
+//
+//        cards = shuffleCards(cards: cardsArray)
+//        isPlaying = true
+//
+//       // delegate?.memoryGameDidStart(self)
+//
+//        return cards
+//    }
 
     public func fetchData() {
         isLoading.onNext(true)
@@ -53,7 +96,6 @@ class CardViewModel {
             if isFinshed {
             print("Fetching ended")
                 self.cards = self.shuffleCards(cards: self.cards)
-                self.isPlaying = true
                 self.isLoading.onNext(false)
             }
         }
@@ -117,20 +159,18 @@ class CardViewModel {
        
         (0...index).forEach { (idx) in
             cardLevel.append(cards[idx])
-            print( cards[idx].id)
             cardLevel.append(cardLevel.last!.copy())
-            print(cardLevel.last!.id)
         }
-        print(cardLevel.count)
+         cardLevel.shuffle()
          return cardLevel
     }
-    
-    func restartGame() {
-        isPlaying = false
-        
-        cards.removeAll()
-        cardsShown.removeAll()
-    }
+//    
+//    func restartGame() {
+//        isPlaying = false
+//        
+//        cards.removeAll()
+//        cardsShown.removeAll()
+//    }
 
     public func cardAtIndex(_ index: Int) -> Card? {
         if cardLevel.count > index {

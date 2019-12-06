@@ -23,12 +23,8 @@ class HomeViewController: UIViewController {
     fileprivate let sectionInsets = UIEdgeInsets(top: 10, left: 10.0, bottom: 10.0, right: 10.0)
     fileprivate let hud = JGProgressHUD(style: .dark)
     fileprivate var currentLevel = 1
+    fileprivate var isPlaying = false
     
-    fileprivate var timeout = 180
-    fileprivate  var runCount = 0
-    fileprivate var timerIsPaused = true
-    fileprivate var timer = Timer()
-   
     //needs refactor
     lazy var cardViewModel = CardViewModel()
     var cards = [Card]()
@@ -55,6 +51,7 @@ class HomeViewController: UIViewController {
         setupBindings()
         cardViewModel.fetchData()
         setupButtonTaps()
+        setupTimerBinding()
         
     }
     
@@ -68,38 +65,7 @@ class HomeViewController: UIViewController {
     }
     
     //MARK: - File Privates
-    fileprivate func setupTimer() {
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (t) in
-        if self.timerIsPaused {
-            self.timerIsPaused = false
-            self.runCount += 1
-            self.timeout -= 1
-            print(self.timeout)
-            self.timeLeftlabl.text = self.timeString(time: self.timeout)
-            if self.runCount >= 180 ||  self.runCount < 0 {
-                self.timeOuted()
-            }
-        } else {
-            Timer().invalidate()
-            self.timerIsPaused = true
-        }
-            
-        }
-    }
-    
-    fileprivate func timeString(time: Int) -> String {
-        let minutes = Int(time) / 60
-        let seconds = time - (minutes) * 60
-        let secondsFraction = seconds - (Int(seconds))
-        return String(format:"%02i:%02i",minutes,Int(seconds),Int(secondsFraction * 10))
-    }
-    
-    fileprivate func timeOuted() {
-        //1. timer.invalidate()
-        //2. show popup
         
-    }
-    
     fileprivate func presentLoginController() {
         DispatchQueue.main.async {
             let loginController = LoginViewController.fromStroyBoard(identifier: "loginController")
@@ -118,16 +84,36 @@ class HomeViewController: UIViewController {
         hud.detailTextLabel.text = message
         hud.show(in: self.view)
     }
+    fileprivate func timeString(time: Int) -> String {
+         let minutes = Int(time) / 60
+         let seconds = time - (minutes) * 60
+         let secondsFraction = seconds - (Int(seconds))
+         return String(format:"%02i:%02i",minutes,Int(seconds),Int(secondsFraction * 10))
+     }
     
     //MARK: - Rx
+    fileprivate func setupTimerBinding() {
+        cardViewModel.timerControl.subscribe(onNext: { (arg0) in
+            if let isPlaying = arg0.isPlaying {
+                print(isPlaying)
+            }
+            if let isTimedOut = arg0.isTimedOut {
+                print(isTimedOut)
+            }
+            let timeStr = self.timeString(time: arg0.timeLeft)
+            self.timeLeftlabl.text = timeStr
+        }).disposed(by: disposeBag)
+        }
     fileprivate func setupButtonTaps() {
-        startButton.rx.tap.bind {
-            self.setupTimer()
+        startButton.rx.tap.bind { 
+            self.cardViewModel.isPlaying = !self.isPlaying
+            self.isPlaying = !self.isPlaying
+//            self.setupTimer()
             if self.startButton.titleLabel?.text == "Start" {
                 self.startButton.setTitle("Pause", for: .normal)
-                self.timerIsPaused = true
+               // self.cardViewModel.timerIsPaused = true
             } else if self.startButton.titleLabel?.text == "Pause"{
-                self.timerIsPaused = false
+                //self.cardViewModel.timerIsPaused = false
                 self.startButton.setTitle("Start", for: .normal)
             }
         }.disposed(by: disposeBag)
@@ -135,9 +121,7 @@ class HomeViewController: UIViewController {
     fileprivate func setupCellConfiguration() {
      
         let observableCard = Observable<[Card]>.just(cardViewModel.cardaForeLevel(level: currentLevel))
-          observableCard.bind(to:
-            collectionView.rx
-            .items(cellIdentifier: "cardCell" , cellType: CardViewCell.self))  {
+          observableCard.bind(to:collectionView.rx.items(cellIdentifier: "cardCell" , cellType: CardViewCell.self))  {
                 item, card, cell in
                  cell.flipCard(false, animted: false)
                 //guard let card = self.cardViewModel.cardAtIndex(item) else { return  }
@@ -148,13 +132,7 @@ class HomeViewController: UIViewController {
     
     fileprivate func setupCellTapHandling() {
         
-        Observable
-            .zip( collectionView
-            .rx
-            .itemSelected
-            ,collectionView
-            .rx
-            .modelSelected(Card.self))
+        Observable.zip( collectionView.rx.itemSelected,collectionView.rx.modelSelected(Card.self))
             .bind{ [unowned self] indexPath, card in
                 print(indexPath)
                 let cell = self.collectionView.cellForItem(at: indexPath) as! CardViewCell
@@ -165,21 +143,15 @@ class HomeViewController: UIViewController {
             .disposed(by: disposeBag)
 
         //did show a card
-        cardViewModel
-            .shownCards
-            .subscribe(onNext: { [unowned self] (cards) in
+        cardViewModel.shownCards.subscribe(onNext: { [unowned self] (cards) in
                         self.handleCellFlipping(forCards: cards, show: true)
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
         
         
         //card unmatched hide it
-        cardViewModel
-            .hiddenCards
-            .subscribe(onNext: { [unowned self] (cards) in
+        cardViewModel.hiddenCards.subscribe(onNext: { [unowned self] (cards) in
                  self.handleCellFlipping(forCards: cards, show: false)
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
     }
     
     fileprivate func handleCellFlipping(forCards cards: [Card], show: Bool) {
@@ -197,10 +169,7 @@ private func setupBindings() {
     
     //Binding to fetching state
     
-    cardViewModel
-        .isLoading
-        .observeOn(MainScheduler.instance)
-        .subscribe(onNext:{ [unowned self] value in
+    cardViewModel.isLoading.observeOn(MainScheduler.instance).subscribe(onNext:{ [unowned self] value in
             if value {
                 self.showHud(withMessage: "Please wait..")
             } else {
@@ -214,8 +183,7 @@ private func setupBindings() {
     
     // observing errors to show
     
-    cardViewModel.error.observeOn(MainScheduler.instance)
-        .subscribe(onNext: { (error) in
+    cardViewModel.error.observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self] (error) in
             switch error {
             case .firebaseError(let message):
                 self.showHud(withMessage: message)
@@ -232,11 +200,7 @@ private func setupBindings() {
         self.scoreLevelLbl.text = "\(score)"
         self.currentLevel = level
         }).disposed(by: disposeBag)
-   
-}
-    
-
-  
+        }
 }
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout{
