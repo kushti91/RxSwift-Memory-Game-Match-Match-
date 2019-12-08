@@ -41,47 +41,47 @@ struct NormalInputValidator: InputValidator {
 
 struct PasswordInputValidator: InputValidator {
     func validateInput(with text: String, message: inout String) -> Bool {
-        var lowerCaseLetter: Bool = false
-        var upperCaseLetter: Bool = false
-        var digit: Bool = false
-        var specialCharacter: Bool = false
-        
-        if text.count  >= 8 {
-            for char in text.unicodeScalars {
-                if !lowerCaseLetter {
-                    lowerCaseLetter = CharacterSet.lowercaseLetters.contains(char)
-                }
-                if !upperCaseLetter {
-                    upperCaseLetter = CharacterSet.uppercaseLetters.contains(char)
-                }
-                if !digit {
-                    digit = CharacterSet.decimalDigits.contains(char)
-                }
-                if !specialCharacter {
-                    specialCharacter = CharacterSet.punctuationCharacters.contains(char)
-                }
-            }
-            
-            let checkList = [digit, upperCaseLetter, specialCharacter, lowerCaseLetter]
-            if let index = checkList.firstIndex(where: { !$0 }) {
-                print("\(index) is false")
-                switch index {
-                case 0:
-                     message = ValidationMessage.noDigitFound.rawValue
-                case 1:
-                    message = ValidationMessage.atleastOneUpperCaseLetter.rawValue
-                case 2:
-                    message = ValidationMessage.atleastOneSpecialCaseLetter.rawValue
-                case 3:
-                    message = ValidationMessage.atleastOneLowerCaseLetter.rawValue
-                default:
-                    message = ValidationMessage.correct.rawValue
-                }
-                return false
-            } else {
+//        var lowerCaseLetter: Bool = false
+//        var upperCaseLetter: Bool = false
+//        var digit: Bool = false
+//        var specialCharacter: Bool = false
+//
+        if text.count  >= 6 {
+//            for char in text.unicodeScalars {
+//                if !lowerCaseLetter {
+//                    lowerCaseLetter = CharacterSet.lowercaseLetters.contains(char)
+//                }
+//                if !upperCaseLetter {
+//                    upperCaseLetter = CharacterSet.uppercaseLetters.contains(char)
+//                }
+//                if !digit {
+//                    digit = CharacterSet.decimalDigits.contains(char)
+//                }
+//                if !specialCharacter {
+//                    specialCharacter = CharacterSet.punctuationCharacters.contains(char)
+//                }
+//            }
+//
+//            let checkList = [digit, upperCaseLetter, specialCharacter, lowerCaseLetter]
+//            if let index = checkList.firstIndex(where: { !$0 }) {
+//                print("\(index) is false")
+//                switch index {
+//                case 0:
+//                     message = ValidationMessage.noDigitFound.rawValue
+//                case 1:
+//                    message = ValidationMessage.atleastOneUpperCaseLetter.rawValue
+//                case 2:
+//                    message = ValidationMessage.atleastOneSpecialCaseLetter.rawValue
+//                case 3:
+//                    message = ValidationMessage.atleastOneLowerCaseLetter.rawValue
+//                default:
+//                    message = ValidationMessage.correct.rawValue
+//                }
+//                return false
+//            } else {
                  message = ValidationMessage.correct.rawValue
                  return true
-            }
+          //  }
         } else {
             message = ValidationMessage.invalidPassword.rawValue
             return false
@@ -151,7 +151,7 @@ enum ValidationMessage: String {
     case atleastOneUpperCaseLetter = "Atleast 1 uppercase letter"
     case atleastOneLowerCaseLetter = "Atleast 1 lowercase letter"
     case atleastOneSpecialCaseLetter = "Atleast 1 special character[Valid: !@#$%^&*]"
-    case invalidPassword     = "Must be 8 Characters. including 1 upper, lower, digit & special symbol"
+    case invalidPassword     = "Must be 6 Characters"
     case noDigitFound        = "Must have 1 digit"
     case correct             = "Accepted"
     case notMatched          = "Does not Match"

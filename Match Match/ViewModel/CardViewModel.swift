@@ -21,7 +21,7 @@ public enum HomeError
 class CardViewModel {
    
     public var cards:[Card]       = [Card]()
-    public var cardsShown:[Card]  = [Card]()
+    private var cardsShown:[Card]  = [Card]()
     fileprivate let downloader    = SDWebImageDownloader()
     fileprivate let disposalBag   = DisposeBag()
     
@@ -33,18 +33,18 @@ class CardViewModel {
            setupTimer()
         }
     }
+    fileprivate var user: User?
+  
     //MARK: - Observables
     
     public let isLoading: PublishSubject <Bool>  = PublishSubject()
     public let shownCards: PublishSubject <[Card]> = PublishSubject()
-    public let hiddenCards: PublishSubject <[Card]> = PublishSubject() //REFACTOR use closure
-    public let user: PublishSubject <User> = PublishSubject()
-    public let levelPassed: PublishSubject <Bool> = PublishSubject()
+    public let hiddenCards: PublishSubject <[Card]> = PublishSubject()
+    public let observableUser: PublishSubject <User> = PublishSubject()
     public let error: PublishSubject <HomeError> = PublishSubject()
-    public let levelUp: PublishSubject <((Bool, Int) -> ())> = PublishSubject()
+    public let levelUp: PublishSubject <((score: Int, level: Int))> = PublishSubject()
     /// isPlaying: Bool , timeLeft: int,  isTimedOut: Bool?
     public let timerControl: PublishSubject <((isPlaying: Bool?,timeLeft: Int, isTimedOut: Bool?) )> = PublishSubject()
-      
     // MARK: - Methods
 
     fileprivate var   timer = Timer()
@@ -54,17 +54,19 @@ class CardViewModel {
             
         } else {
             timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerUpdate), userInfo: nil, repeats: true)
-            
         }
     }
     
     fileprivate func stopTimer(timer : Timer) {
         timer.invalidate()
-    
         timerControl.onNext((false,timeout, isTimedOut))
-
     }
     
+    fileprivate func resetTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerUpdate), userInfo: nil, repeats: false)
+        timeout = 180
+        runCount = 0
+    }
     @objc fileprivate func timerUpdate(timer: Timer) {
             runCount += 1
             timeout -= 1
@@ -76,18 +78,6 @@ class CardViewModel {
                }
            }
     
- 
-  
-//    func newGame(cardsArray:[Card]) -> [Card] {
-//
-//        cards = shuffleCards(cards: cardsArray)
-//        isPlaying = true
-//
-//       // delegate?.memoryGameDidStart(self)
-//
-//        return cards
-//    }
-
     public func fetchData() {
         isLoading.onNext(true)
         print("fetching strted")
@@ -95,7 +85,7 @@ class CardViewModel {
         fetchImagesFromFireStore { isFinshed in
             if isFinshed {
             print("Fetching ended")
-                self.cards = self.shuffleCards(cards: self.cards)
+                self.cards.shuffle() 
                 self.isLoading.onNext(false)
             }
         }
@@ -139,7 +129,8 @@ class CardViewModel {
                 return
             }
             guard let dataDic = snapshot?.data() else {return}
-            self.user.onNext(User(dictionary: dataDic))
+            self.user = User(dictionary: dataDic)
+            self.observableUser.onNext(self.user ?? User(dictionary: dataDic))
         }
        
     }
@@ -148,7 +139,7 @@ class CardViewModel {
         switch level {
         case 1: return generateCards(index: 2)
         case 2: return generateCards(index: 3)
-        case 3: return generateCards(index: 3)
+        case 3: return generateCards(index: 5)
         case 4: return generateCards(index: 7)
         default:
             return [Card]()
@@ -156,7 +147,7 @@ class CardViewModel {
     }
     var cardLevel = [Card]()
     fileprivate func generateCards(index: Int) -> [Card] {
-       
+            cardLevel.removeAll() // clean the arry before starting a new level
         (0...index).forEach { (idx) in
             cardLevel.append(cards[idx])
             cardLevel.append(cardLevel.last!.copy())
@@ -164,13 +155,6 @@ class CardViewModel {
          cardLevel.shuffle()
          return cardLevel
     }
-//    
-//    func restartGame() {
-//        isPlaying = false
-//        
-//        cards.removeAll()
-//        cardsShown.removeAll()
-//    }
 
     public func cardAtIndex(_ index: Int) -> Card? {
         if cardLevel.count > index {
@@ -211,14 +195,32 @@ class CardViewModel {
             cardsShown.append(card)
         }
         
-        if cardsShown.count == cards.count {
+        if cardsShown.count == cardLevel.count {
             endGame()
         }
     }
     
     fileprivate func endGame() {
+        
         isPlaying = false
-        //delegate?.memoryGameDidEnd(self)
+        var level = user?.level ?? 1
+        var score =  user?.highScore ?? 0
+        level += 1
+        score += timeout
+        saveInfoToFireStore(score: score, level: level)
+        levelUp.onNext((score, level))
+        resetTimer()
+
+    }
+    fileprivate func saveInfoToFireStore(score: Int, level: Int) {
+        let uid = Auth.auth().currentUser?.uid ?? ""
+        Firestore.firestore().collection("users").document(uid).updateData(["highScore" : score, "level": level]) { (error) in
+            if let error = error {
+                self.error.onNext(.firebaseError(error.localizedDescription))
+                print(error.localizedDescription)
+                return
+            }
+        }
     }
     
     fileprivate func unmatchedCardShown() -> Bool {
@@ -230,10 +232,5 @@ class CardViewModel {
         return unmatchedCard
     }
     
-    fileprivate func shuffleCards(cards:[Card]) -> [Card] {
-        var randomCards = cards
-        randomCards.shuffle()
-        
-        return randomCards
-    }
+ 
 }

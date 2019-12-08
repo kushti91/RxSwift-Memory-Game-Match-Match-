@@ -14,6 +14,7 @@ public enum StyleType {
 }
 
 public struct ColorSet {
+    
     public var titleColor: UIColor
     public var leftViewColor: UIColor
     public var leftImgTintColor: UIColor

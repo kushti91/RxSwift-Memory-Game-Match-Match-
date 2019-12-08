@@ -39,7 +39,7 @@ class RegisterationViewController: UIViewController {
         registerButton.layer.cornerRadius = 10
         setupTextFields()
         setupBindings()
-        setupObservers()
+        setupBindables()
 
     }
     override func viewWillLayoutSubviews() {
@@ -51,7 +51,7 @@ class RegisterationViewController: UIViewController {
         nicknameField.validationType = .normalValidation
         emailField.validationType = .emailValidation
         passwordField.validationType = .passwordValidation
-        passwordAgianField.validationType = .normalValidation
+        passwordAgianField.validationType = .passwordValidation
         passwordField.textField.isSecureTextEntry = true
         passwordAgianField.textField.isSecureTextEntry = true
         
@@ -81,9 +81,9 @@ class RegisterationViewController: UIViewController {
         }).disposed(by: disposeBag)
     }
     
-    fileprivate  func setupObservers() {
+    fileprivate  func setupBindables() {
          //check form validity
-        registerationViewModel.observableIsFormValid.subscribe(onNext: { isFormValid in
+        registerationViewModel.observableIsFormValid.subscribe(onNext: {[unowned self] isFormValid in
             if isFormValid == true {
                 self.registerButton.isEnabled = true
                 self.registerButton.setTitleColor(.black, for: .normal)
@@ -109,7 +109,16 @@ class RegisterationViewController: UIViewController {
             self.navigationController?.pushViewController(HomeViewController.fromStroyBoard(identifier: "homeController"), animated: true)
             }
         }).disposed(by: disposeBag)
-    
+      // check password matching
+        registerationViewModel.observableIsPasswordMatch.subscribe(onNext: { [unowned self](isMatch) in
+            guard let isMatch = isMatch else {return}
+            if !isMatch {
+                self.passwordAgianField.messageLbl.text = "Passowrd doesnt match"
+                //self.passwordAgianField.decorateInvalidUI()
+            } else {
+                self.passwordAgianField.messageLbl.text = ""
+            }
+            }).disposed(by: disposeBag)
     }
     
     
@@ -133,6 +142,10 @@ class RegisterationViewController: UIViewController {
         else if tf == nicknameField.textField {
             registerationViewModel.nickName = tf.text
         }
+        else if tf == passwordAgianField.textField {
+            registerationViewModel.passwordAgain = tf.text
+        }
+
     }
     
     //MARK: - IB Actions

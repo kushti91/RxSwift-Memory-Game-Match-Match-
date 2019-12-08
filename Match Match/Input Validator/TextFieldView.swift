@@ -266,7 +266,7 @@ open class TextFieldView: UIView {
         }
     }
 
-    private func decorateInvalidUI() {
+    public func decorateInvalidUI() {
         messageLbl.textColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)             //UIColor.red
         messageLbl.backgroundColor = .clear//UIColor(white: 1, alpha: 0.5)
         self.rightImage = nil

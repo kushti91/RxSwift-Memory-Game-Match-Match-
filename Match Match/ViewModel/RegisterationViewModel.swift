@@ -17,10 +17,11 @@ class RegisterationViewModel {
     public var nickName: String? {didSet {checkFormValidity()}}
     public var email:    String? {didSet {checkFormValidity()}}
     public var password: String? {didSet {checkFormValidity()}}
+    public var passwordAgain: String? { didSet{ checkFormValidity() }}
     
     //MARK: - FilePrivates
     fileprivate func checkFormValidity() {
-           let isFormValid =  nickName?.isEmpty == false && email?.isEmpty == false && password?.isEmpty == false
+           let isFormValid =  nickName?.isEmpty == false && email?.isEmpty == false && password?.isEmpty == false && checkPassWordMatch()
         observableIsFormValid.accept(isFormValid)
        }
     public func performRegistering(completion: @escaping(Error?) -> () ) {
@@ -63,10 +64,26 @@ class RegisterationViewModel {
             completion(nil)
         }
     }
+    fileprivate func checkPassWordMatch() -> Bool {
+        guard let passwordAgain = passwordAgain, let password = password else {return false}
+        var isMatch = false
+        if passwordAgain.count >= password.count {
+            if passwordAgain == password {
+                observableIsPasswordMatch.accept(true)
+                isMatch =  true
+            }else {
+                observableIsPasswordMatch.accept(false)
+                isMatch = false
+            }
+        }
+        return isMatch
+    }
     
     //MARK: - Rx VARs
     public var observableIsFormValid = BehaviorRelay<Bool>(value: false)
+    public var observableIsPasswordMatch = BehaviorRelay<Bool?>(value: nil)
     public var observableIsRegistering = BehaviorRelay<Bool?>(value: nil)
+    
 
 
 }

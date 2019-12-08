@@ -20,14 +20,20 @@ class HomeViewController: UIViewController {
     @IBInspectable private var firstColor: UIColor = #colorLiteral(red: 0.9438400269, green: 0.6414444447, blue: 0.3371585011, alpha: 1)
     @IBInspectable private var secondColor: UIColor = #colorLiteral(red: 0.8949478269, green: 0.3861214817, blue: 0.2596493065, alpha: 1)
     private let disposeBag = DisposeBag()
-    fileprivate let sectionInsets = UIEdgeInsets(top: 10, left: 10.0, bottom: 10.0, right: 10.0)
+    fileprivate let sectionInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
     fileprivate let hud = JGProgressHUD(style: .dark)
-    fileprivate var currentLevel = 1
-    fileprivate var isPlaying = false
-    
+    fileprivate var currentLevel = 1 {
+        didSet {
+            if currentLevel > 4 {
+                endGame()
+            }
+        }
+    }
+    let CpopupView = PopUpView(frame: .zero, type: .congrats)
+    let LpopupView = PopUpView(frame: .zero, type: .loss)
+
     //needs refactor
     lazy var cardViewModel = CardViewModel()
-    var cards = [Card]()
     
     //MARK: - IB Outlets
     @IBOutlet weak var scoreLbl: UILabel!
@@ -40,24 +46,33 @@ class HomeViewController: UIViewController {
     //MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
-       // try! Auth.auth().signOut()
+         navigationController?.navigationBar.isHidden = true
+         collectionView.rx.setDelegate(self).disposed(by: disposeBag)
+         setupGradentLayer()
+         setupBindings()
+         setupButtonTaps()
+         setupTimerBinding()
         if Auth.auth().currentUser == nil {
             presentLoginController()
+            return
         }
-        
-        collectionView.rx.setDelegate(self).disposed(by: disposeBag)
-        setupGradentLayer()
-        setupBindings()
-        cardViewModel.fetchData()
-        setupButtonTaps()
-        setupTimerBinding()
         
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         gradientLayer.frame = view.frame
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if Auth.auth().currentUser != nil {
+        collectionView.isUserInteractionEnabled = false
+        
+        if cardViewModel.cardLevel.isEmpty {
+        cardViewModel.fetchData()
+            }
+      
+        }
     }
   
     //MARK: - IB Actions
@@ -71,6 +86,7 @@ class HomeViewController: UIViewController {
             let loginController = LoginViewController.fromStroyBoard(identifier: "loginController")
             self.navigationController?.pushViewController(loginController, animated: false)
         }
+         
     }
     
     fileprivate func setupGradentLayer() {
@@ -84,6 +100,7 @@ class HomeViewController: UIViewController {
         hud.detailTextLabel.text = message
         hud.show(in: self.view)
     }
+    
     fileprivate func timeString(time: Int) -> String {
          let minutes = Int(time) / 60
          let seconds = time - (minutes) * 60
@@ -98,7 +115,8 @@ class HomeViewController: UIViewController {
                 print(isPlaying)
             }
             if let isTimedOut = arg0.isTimedOut {
-                print(isTimedOut)
+                if isTimedOut {
+                    self.LpopupView.show(in: self.view) }
             }
             let timeStr = self.timeString(time: arg0.timeLeft)
             self.timeLeftlabl.text = timeStr
@@ -106,26 +124,30 @@ class HomeViewController: UIViewController {
         }
     fileprivate func setupButtonTaps() {
         startButton.rx.tap.bind { 
-            self.cardViewModel.isPlaying = !self.isPlaying
-            self.isPlaying = !self.isPlaying
-//            self.setupTimer()
+
             if self.startButton.titleLabel?.text == "Start" {
                 self.startButton.setTitle("Pause", for: .normal)
-               // self.cardViewModel.timerIsPaused = true
+                self.collectionView.isUserInteractionEnabled = true
+                self.cardViewModel.isPlaying = true
             } else if self.startButton.titleLabel?.text == "Pause"{
-                //self.cardViewModel.timerIsPaused = false
                 self.startButton.setTitle("Start", for: .normal)
+                self.collectionView.isUserInteractionEnabled = false
+                self.cardViewModel.isPlaying = false
             }
         }.disposed(by: disposeBag)
     }
+    
+    lazy var dataSource: BehaviorRelay<[Card]> = BehaviorRelay(value: cardViewModel.cardaForeLevel(level: currentLevel))
+  
     fileprivate func setupCellConfiguration() {
-     
-        let observableCard = Observable<[Card]>.just(cardViewModel.cardaForeLevel(level: currentLevel))
-          observableCard.bind(to:collectionView.rx.items(cellIdentifier: "cardCell" , cellType: CardViewCell.self))  {
+        print("Current leve = ", currentLevel)
+
+        dataSource.asObservable().bind(to:collectionView.rx.items(cellIdentifier: "cardCell" , cellType: CardViewCell.self))  {
                 item, card, cell in
                  cell.flipCard(false, animted: false)
-                //guard let card = self.cardViewModel.cardAtIndex(item) else { return  }
                 cell.card = card
+            cell.contentView.frame = cell.bounds;
+            cell.contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         }.disposed(by: disposeBag)
         
     }
@@ -134,7 +156,6 @@ class HomeViewController: UIViewController {
         
         Observable.zip( collectionView.rx.itemSelected,collectionView.rx.modelSelected(Card.self))
             .bind{ [unowned self] indexPath, card in
-                print(indexPath)
                 let cell = self.collectionView.cellForItem(at: indexPath) as! CardViewCell
                 if  cell.isShown {return}
                 self.cardViewModel.didSelectCard(card)
@@ -180,7 +201,6 @@ private func setupBindings() {
         })
         .disposed(by: disposeBag)
     
-    
     // observing errors to show
     
     cardViewModel.error.observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self] (error) in
@@ -194,22 +214,48 @@ private func setupBindings() {
             }
         }).disposed(by: disposeBag)
     
-    cardViewModel.user.observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self] (user) in
+    cardViewModel.observableUser.observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self] (user) in
         guard let nickName = user.nickName, let score = user.highScore, let level = user.level else {return}
         self.scoreLbl.text = "\(nickName)'s\n Score"
         self.scoreLevelLbl.text = "\(score)"
         self.currentLevel = level
         }).disposed(by: disposeBag)
+    
+    cardViewModel.levelUp.observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self] (levelUp) in
+        self.collectionView.isUserInteractionEnabled = false
+        self.startButton.setTitle("Start", for: .normal)
+        self.scoreLevelLbl.text  = "\(levelUp.score)"
+        self.currentLevel = levelUp.level
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        self.collectionView.collectionViewLayout.invalidateLayout()
+        self.collectionView.setNeedsLayout()
+        self.collectionView.layoutIfNeeded()
+            self.dataSource.accept([])
+            print(self.currentLevel)
+            print(self.cardViewModel.cardaForeLevel(level: self.currentLevel).count)
+            self.dataSource.accept(self.cardViewModel.cardaForeLevel(level: self.currentLevel))
         }
+        if self.currentLevel > 4  {
+            self.endGame()
+        }
+          }).disposed(by: disposeBag)
+        }
+    fileprivate func endGame() {
+        CpopupView.show(in: self.view)
+        timeLeftlabl.isHidden = true
+    }
 }
 
-extension HomeViewController: UICollectionViewDelegateFlowLayout{
+extension HomeViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate{
     // Collection view flow layout setup
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let paddingSpace = Int(sectionInsets.left) * 3
-        let availableWidth = Int(view.bounds.width) - paddingSpace
-        let widthPerItem = availableWidth / 3
-
+        let paddingSpace = 8
+        var rows = 3
+        let availableWidth = Int(collectionView.frame.width)
+        if  currentLevel >= 4 {
+            rows = 4
+        }
+        let widthPerItem = availableWidth / rows  - paddingSpace * 2
         return CGSize(width: widthPerItem, height: widthPerItem)
     }
 
@@ -218,6 +264,12 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout{
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return sectionInsets.left
+    
+        return 8
     }
+ 
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
+    }
+ 
 }
