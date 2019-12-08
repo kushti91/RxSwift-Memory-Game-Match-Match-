@@ -11,6 +11,15 @@ import XCTest
 
 class Match_MatchTests: XCTestCase {
 
+    func testCardViewModel() {
+        let dic = ["id": 1, "nickName": "Ali", "highScore": 120, "level": 2] as [String : Any]
+        let user = User(dictionary: dic)
+
+        let cardVM = CardViewModel()
+        cardVM.user = user
+        //XCTAssertEqual(cardVM.user, user)
+    }
+
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }

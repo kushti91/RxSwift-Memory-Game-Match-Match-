@@ -13,7 +13,6 @@
 		410F95D6238D16BC0028ECC5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 410F95D4238D16BC0028ECC5 /* Main.storyboard */; };
 		410F95D8238D16BD0028ECC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 410F95D7238D16BD0028ECC5 /* Assets.xcassets */; };
 		410F95DB238D16BD0028ECC5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 410F95D9238D16BD0028ECC5 /* LaunchScreen.storyboard */; };
-		410F95E6238D16BD0028ECC5 /* Match_MatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410F95E5238D16BD0028ECC5 /* Match_MatchTests.swift */; };
 		410F95F1238D16BD0028ECC5 /* Match_MatchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410F95F0238D16BD0028ECC5 /* Match_MatchUITests.swift */; };
 		410F9602238FBFC60028ECC5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410F9601238FBFC60028ECC5 /* LoginViewController.swift */; };
 		410F9604238FC74E0028ECC5 /* IconSet.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 410F9603238FC74E0028ECC5 /* IconSet.xcassets */; };
@@ -30,6 +29,7 @@
 		412BE6432391C44E00ABFD5D /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BE6422391C44E00ABFD5D /* Card.swift */; };
 		412BE6452391C5CD00ABFD5D /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BE6442391C5CD00ABFD5D /* UIExtensions.swift */; };
 		412BE6472392717800ABFD5D /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BE6462392717800ABFD5D /* CardViewModel.swift */; };
+		415B356F239D6E0E0041C481 /* Match_MatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410F95E5238D16BD0028ECC5 /* Match_MatchTests.swift */; };
 		41695F9F239CEF39003001B9 /* LeaderBoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41695F9E239CEF39003001B9 /* LeaderBoardCell.swift */; };
 		41695FA1239CEF55003001B9 /* LeaderBoardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41695FA0239CEF55003001B9 /* LeaderBoardController.swift */; };
 		41950D572390174E00741D80 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41950D562390174E00741D80 /* LoginViewModel.swift */; };
@@ -566,6 +566,7 @@
 				412BE63823905FBB00ABFD5D /* RegisterationViewModel.swift in Sources */,
 				41695FA1239CEF55003001B9 /* LeaderBoardController.swift in Sources */,
 				410F960D238FC8CC0028ECC5 /* TextFieldViewStyle.swift in Sources */,
+				415B356F239D6E0E0041C481 /* Match_MatchTests.swift in Sources */,
 				410F960F238FC8F80028ECC5 /* Validator.swift in Sources */,
 				412BE6472392717800ABFD5D /* CardViewModel.swift in Sources */,
 				410F9602238FBFC60028ECC5 /* LoginViewController.swift in Sources */,
@@ -588,7 +589,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				410F95E6238D16BD0028ECC5 /* Match_MatchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -802,6 +802,38 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YDDMUSGGM6;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(PLATFORM_DIR)/Developer/Library/Frameworks\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/BoringSSL-GRPC\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAuth\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreDiagnostics\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseDatabase\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseFirestore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseInstanceID\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseStorage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleDataTransport\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleDataTransportCCTSupport\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/JGProgressHUD\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Protobuf\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxBlocking\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxCocoa\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxRelay\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxTest\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-Core\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/leveldb-library\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleAppMeasurement/Frameworks\"",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
 				INFOPLIST_FILE = "Match MatchTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -825,6 +857,37 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YDDMUSGGM6;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(PLATFORM_DIR)/Developer/Library/Frameworks\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/BoringSSL-GRPC\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAuth\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreDiagnostics\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseDatabase\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseFirestore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseInstanceID\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseStorage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleDataTransport\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleDataTransportCCTSupport\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/JGProgressHUD\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Protobuf\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxBlocking\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxCocoa\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxRelay\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxTest\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-Core\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/leveldb-library\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleAppMeasurement/Frameworks\"",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
 				INFOPLIST_FILE = "Match MatchTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -33,7 +33,7 @@ class CardViewModel {
            setupTimer()
         }
     }
-    fileprivate var user: User?
+     var user: User?
   
     //MARK: - Observables
     
