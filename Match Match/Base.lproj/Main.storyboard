@@ -258,7 +258,7 @@
                                 <state key="normal" title="Start"/>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.34879083820000001" green="0.25034722170000001" blue="0.46463962860000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="JYu-0O-9WB" secondAttribute="trailing" constant="10" id="B59-4I-OTM"/>
                             <constraint firstItem="hcy-hZ-J4B" firstAttribute="bottom" secondItem="vaG-vR-6Yv" secondAttribute="bottom" constant="12" id="G3Q-YM-zGn"/>

@@ -183,11 +183,9 @@
 				410F95D4238D16BC0028ECC5 /* Main.storyboard */,
 				410F95D7238D16BD0028ECC5 /* Assets.xcassets */,
 				410F9603238FC74E0028ECC5 /* IconSet.xcassets */,
-				410F9610238FEB890028ECC5 /* Comic_Andy.ttf */,
-				41D6BDF0239C43CC001184FC /* f.gif */,
-				412BE63923914A3000ABFD5D /* GoogleService-Info.plist */,
-				410F95D9238D16BD0028ECC5 /* LaunchScreen.storyboard */,
 				410F95DC238D16BD0028ECC5 /* Info.plist */,
+				412BE63923914A3000ABFD5D /* GoogleService-Info.plist */,
+				415B3570239D72B80041C481 /* Utils */,
 			);
 			path = "Match Match";
 			sourceTree = "<group>";
@@ -258,6 +256,16 @@
 				41D6BDEE239C41A8001184FC /* UIMageExt.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		415B3570239D72B80041C481 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				410F9610238FEB890028ECC5 /* Comic_Andy.ttf */,
+				41D6BDF0239C43CC001184FC /* f.gif */,
+				410F95D9238D16BD0028ECC5 /* LaunchScreen.storyboard */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		41695F94239CD915003001B9 /* Reg & Login */ = {

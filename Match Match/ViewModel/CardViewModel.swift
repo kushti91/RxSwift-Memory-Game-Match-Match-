@@ -147,7 +147,8 @@ class CardViewModel {
     }
     var cardLevel = [Card]()
     fileprivate func generateCards(index: Int) -> [Card] {
-            cardLevel.removeAll() // clean the arry before starting a new level
+        cardLevel.removeAll() // clean the arry before starting a new level
+        cardsShown.removeAll()
         (0...index).forEach { (idx) in
             cardLevel.append(cards[idx])
             cardLevel.append(cardLevel.last!.copy())
