@@ -19,6 +19,7 @@ it is available under the MIT license. See the LICENSE file for more info.
 - [twitter][identifier]
 - [blog] [another-identifier]
 
-[identifier]: https://twitter.com/alihilal94
 [another-identifier]: https://www.alihilal.com
+[identifier]: https://twitter.com/alihilal94
+
 
