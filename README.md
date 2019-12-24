@@ -16,7 +16,9 @@ To run the project you will need the following collections
 it is available under the MIT license. See the LICENSE file for more info.
 
 ## About Author
-- [twitter][https://twitter.com/alihilal94]
-- [blog] [www.alihilal.com]
+- [twitter][identifier]
+- [blog] [identifier2]
 
+[identifier]: https://twitter.com/alihilal94
+[identifier2]: www.alihilal.com
 
