@@ -17,8 +17,8 @@ it is available under the MIT license. See the LICENSE file for more info.
 
 ## About Author
 - [twitter][identifier]
-- [blog] [identifier2]
+- [blog] [another-identifier]
 
 [identifier]: https://twitter.com/alihilal94
-[identifier2]: www.alihilal.com
+[another-identifier]: https://www.alihilal.com
 
