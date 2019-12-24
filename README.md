@@ -2,7 +2,7 @@
 
 
 ## How it works
-It uses Firebase to authunticate users and store their progress 
+It uses Firebase to authunticate users and store their progress </br> 
 ![Alt Text](https://github.com/engali94/RxSwift-Memory-Game-Match-Match-/blob/master/ScreenRecording2019-12-24at10255.gif)
 
 ## Setup FireStore DB
