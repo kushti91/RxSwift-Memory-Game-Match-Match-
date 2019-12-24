@@ -43,7 +43,6 @@ class CardViewModel {
     public let observableUser: PublishSubject <User> = PublishSubject()
     public let error: PublishSubject <HomeError> = PublishSubject()
     public let levelUp: PublishSubject <((score: Int, level: Int))> = PublishSubject()
-    /// isPlaying: Bool , timeLeft: int,  isTimedOut: Bool?
     public let timerControl: PublishSubject <((isPlaying: Bool?,timeLeft: Int, isTimedOut: Bool?) )> = PublishSubject()
     // MARK: - Methods
 
